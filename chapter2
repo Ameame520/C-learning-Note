@@ -1,0 +1,170 @@
+练习2-1 Programming in C is fun!
+  
+#include<stdio.h> 
+int main(void){
+	printf("Programming in C is fun!");
+}
+练习2-3 输出倒三角图案
+#include<stdio.h>
+int main(void)
+{
+    printf("* * * *\n * * *\n  * *\n   *");
+}
+
+练习2-4 温度转换
+#include<stdio.h>
+int main(void){
+int F=150,C;
+    C=(F-32)*5/9;
+    printf("fahr = 150, celsius = %d",C);
+}
+
+练习2-6 计算物体自由下落的距离
+#include<stdio.h>
+int main(void){
+double g=10,t=3,h;
+h=0.5*g*t*t;
+printf("height = %.2f",h);
+}
+
+练习2-8 计算摄氏温度
+#include<stdio.h>
+int main(void){
+int F,C;
+    scanf("%d",&F);
+    C=5*(F-32)/9;
+    printf("Celsius = %d",C);
+}
+
+练习2-9 整数四则运算
+#include<stdio.h>
+int main(void){
+    int x,y;
+    scanf("%d %d",&x,&y);
+    printf("%d + %d = %d\n",x,y,x+y);
+    printf("%d - %d = %d\n",x,y,x-y);
+    printf("%d * %d = %d\n",x,y,x*y);
+    printf("%d / %d = %d\n",x,y,x/y);
+}
+
+练习2-10 计算分段函数[1]
+#include<stdio.h>
+int main(void){
+    float x,y;
+    scanf("%f",&x);
+    if(x==0){
+        y=0;
+    }
+    else{
+        y=1/x;
+    }
+    printf("f(%.1f) = %.1f",x,y);
+}
+
+练习2-11 计算分段函数[2]
+#include<stdio.h>
+#include<math.h>
+int main(void){
+double fx,x;
+    scanf("%lf",&x);//本题需要注意,定义double,对应scanf必须是%lf,printf可以是.2f
+    if(x>=0){
+        fx=sqrt(x);
+    }
+    else{
+        fx=pow(x+1,2)+x*2+1/x;
+    }
+    printf("f(%.2f) = %.2f",x,fx);
+}
+
+练习2-12 输出华氏-摄氏温度转换表
+#include<stdio.h>
+int main(){
+int lower,upper;double c;
+    scanf("%d %d",&lower,&upper);
+    if(lower<=upper&&upper<=100){
+        printf("fahr celsius\n");
+        for(int i=lower;i<=upper;i+=2)
+        {
+            c=(i-32)*5/9.0;//需要增加操作使得C可以得到一个浮点数,比如强制类型转换和9.0,否则将会从int截断为double
+            printf("%d%6.1f\n",i,c);//占据六个字符宽度
+        }
+    }
+    else{
+        printf("Invalid.");
+    }
+
+}
+
+练习2-13 求N分之一序列前N项和
+#include<stdio.h>
+int main(void){
+    int n;
+    scanf("%d",&n);
+    double sum=0;
+    for(int i=1;i<=n;i++)
+    {sum+=1.0/i;}
+    printf("sum = %.6f",sum);
+}
+
+练习2-14 求奇数分之一序列前N项和
+#include<stdio.h>
+int main(void){
+int n;double sum=0;
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        int k=2*i-1;
+        sum+=1.0/k;
+    }
+    printf("sum = %.6f",sum);
+}
+
+练习2-15 求简单交错序列前N项和
+#include<stdio.h>
+int main(void){
+int n,c=1;double sum=0;
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        int k=3*i-2;
+        sum+=1.0/k*c;
+        c*=-1;
+    }
+    printf("sum = %.3f",sum);
+}
+
+练习2-17 生成3的乘方表
+分数 15
+#include<stdio.h>
+#include<math.h>
+int main(void){
+int n,p;
+    scanf("%d",&n);
+    for(int i=0;i<=n;i++)
+    {
+    p=pow(3,i);
+    printf("pow(3,%d) = %d\n",i,p);
+    }
+
+}
+
+练习2-18 求组合数
+分数 15
+#include<stdio.h>
+double fact(int n)
+{
+    double ret=1;
+    for(int i=1;i<=n;i++)
+    {
+        ret*=i;
+    }
+return ret;
+}
+int main(void)
+{
+int n,m;
+    scanf("%d %d",&m,&n);
+    int result;
+    result=fact(n)/(fact(m)*fact(n-m));
+    printf("result = %d",result);
+}
