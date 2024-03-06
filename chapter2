@@ -168,3 +168,98 @@ int n,m;
     result=fact(n)/(fact(m)*fact(n-m));
     printf("result = %d",result);
 }
+
+习题2-1 求整数均值
+#include<stdio.h>
+#include<math.h>
+int main(void){
+int a,b,c,d;
+    scanf("%d %d %d %d",&a,&b,&c,&d);
+    int sum=a+b+c+d;double avg=sum/4.0;
+    printf("Sum = %d; Average = %.1f",sum,avg);
+    
+} 
+
+习题2-2 阶梯电价
+#include<stdio.h>
+int main(void)
+{
+int kw;double fee=0;
+    scanf("%d",&kw);
+    if(kw<0){printf("Invalid Value!");}
+    else if(kw<=50)
+    {
+        fee=kw*0.53;
+        printf("cost = %.2f",fee);
+    }
+    else{
+        fee=50*0.53+(kw-50)*0.58;
+        printf("cost = %.2f",fee);
+    }
+    
+}
+
+习题2-3 求平方与倒数序列的部分和
+#include<stdio.h>
+int main(void)
+{
+int m,n;double ret=0;
+    scanf("%d %d",&m,&n);
+    for(int i=m;i<=n;i++)
+    {
+        ret+=i*i; ret+=1.0/i;//需要将1/i 转换为浮点格式
+    }
+    printf("sum = %.6f",ret);
+}
+
+习题2-4 求交错序列前N项和
+#include<stdio.h>
+int main(void)
+{
+
+    int n;scanf("%d",&n);//读取n
+    double sig=1.0,sum=0;
+    for(int i=1;i<=n;i++)//for loop,求前n项和
+    {
+        sum+=sig*i/(2*i-1); sig*=-1;
+    }
+    printf("%.3f",sum);
+}
+
+习题2-5 求平方根序列前N项和
+分数 15
+#include<stdio.h>
+#include<math.h>
+int main(void)
+{
+int n;scanf("%d",&n); double sum=0;
+    for(int i=1;i<=n;i++)
+    {
+        sum+=sqrt(i);
+    }
+    printf("sum = %.2f",sum);
+}
+
+习题2-6 求阶乘序列前N项和
+#include<stdio.h>
+int fact(int n)
+{
+    int ret=1;
+ for(int i=1;i<=n;i++)
+ {
+    ret=ret*i; 
+ }
+    return ret;
+}
+int main(void)
+{
+    int n; int sum=0;
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        sum+=fact(i);
+    }
+    printf("%d",sum);
+}
+
+
