@@ -1,0 +1,103 @@
+练习3-2 计算符号函数的值
+分数 10
+#include<stdio.h>
+int sign(int x)
+{
+    if(x>0){
+        return 1;
+    }
+    else if(x<0){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+int main(void)
+{
+    int x;scanf("%d",&x);
+    printf("sign(%d) = %d",x,sign(x));
+}
+
+练习3-3 统计学生平均成绩与及格人数
+分数 15
+#include<stdio.h>
+//方法一 每次读取一个数字,读一个扔一个,记录一个
+ // int main(void){
+ //     int count=0,sum=0;double avg=0,summark=0;
+ //     int stu,mark;
+ //     scanf("%d",&stu);
+ //     if (stu==0){printf("average = 0.0\ncount = 0");}
+ //     else{
+ //     while(sum<stu){
+ //         scanf("%d",&mark);
+ //         sum++;
+ //         if(mark>=60){count++;}
+ //         summark+=mark;
+ //     }
+ //     avg=summark/stu;
+ //     printf("average = %.1f\ncount = %d",avg,count);
+ //     }
+ // }
+//方法二:用一个数组存储成绩信息,数组容量为数组中元素个数.
+
+int main(void)
+{
+    int stu,i=0,sum=0,count=0;
+    scanf("%d",&stu);
+    int arr[stu];
+    for(i=0;i<stu;i++)
+    {
+        int mark;
+        scanf("%d",&mark);
+        arr[i]=mark;
+        sum+=mark;
+        if(mark>=60){count++;}
+    }
+    double avg=0;
+    if(i>0){
+     avg=sum*1.0/i;
+    }
+    printf("average = %.1f\ncount = %d",avg,count);
+}
+
+练习3-4 统计字符
+分数 15
+#include<stdio.h>
+int main(void)
+{
+    char c;int le=0,bl=0,di=0,ot=0;
+    for(int i=0;i<10;i++)
+    {
+        scanf("%c",&c);
+        if(c==32||c==10){bl++;}//换行是10
+        else if(c>=65&&c<=90 || c>=97&&c<=122){le++;}
+        else if(c>=48&&c<=57){di++;}
+        else{ot++;}
+    }
+printf("letter = %d, blank = %d, digit = %d, other = %d",le,bl,di,ot);
+}
+
+练习3-5 输出闰年
+分数 15
+#include<stdio.h>
+int main(void)
+{
+    int year; int count=0;
+    scanf("%d",&year);
+    if(year<=2000||year>2100){
+        printf("Invalid year!");
+    }
+    else if(year<2004){
+        printf("None");
+    }
+    else{
+        for(int i=2004;i<=year;i+=4){
+            if((i%4==0&&i%100!=0)||(i%400==0)){printf("%d\n",i);}
+        }
+    }
+}
+
+
+
+
