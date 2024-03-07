@@ -1,0 +1,18 @@
+练习4-3 求给定精度的简单交错序列部分和
+分数 15
+#include<stdio.h>
+int main(void)
+{
+double eps;
+    scanf("%lf",&eps);
+    double i=1,flag=1,sum=0;
+    double k;
+    do
+    {
+        k=1.0/i;
+        sum+=(k*flag);
+        i+=3;
+        flag*=-1;
+    }while(k>eps);
+    printf("sum = %lf",sum);
+}
