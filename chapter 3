@@ -98,6 +98,82 @@ int main(void)
     }
 }
 
+习题3-2 高速公路超速处罚
+分数 15
+int main(void)
+{
+    int speed,limit;
+    scanf("%d %d",&speed,&limit);
+    double k=(1.0*speed/limit-1)*100;
+    if(k<10){
+        printf("OK");
+    }
+    else if(k<50)
+    {
+        printf("Exceed %.f%%. Ticket 200",k);//对%字面输出需要用%解引用
+    }
+    else{
+        printf("Exceed %.f%%. License Revoked",k);
+    }
+}
+
+习题3-3 出租车计价
+分数 15
+#include<stdio.h>
+int main(void)
+{
+    double n, time,fee;
+    scanf("%lf %lf",&n,&time);
+    if(n<3){fee=10;}
+    else if(n<10){fee=10+(n-3)*2;}
+    else{fee=24+3.0*(n-10);}
+    int add=(int)time/5*2;//不满就舍去算法->需要定义int
+    fee+=add;//必须确保费用加上整数,方便四舍五入
+    printf("%.f",fee);
+}
+
+习题3-4 统计学生成绩
+分数 15
+#include<stdio.h>
+int main(void)
+{
+int num,mark,A=0,B=0,C=0,D=0,E=0;scanf("%d",&num);
+for(int i=1;i<=num;i++)
+{
+    scanf("%d",&mark);
+    if(mark>=90){A++;}
+    else if(mark>=80){B++;}
+    else if(mark>=70){C++;}
+    else if(mark>=60){D++;}
+    else{E++;}
+}
+    printf("%d %d %d %d %d",A,B,C,D,E);
+}
+
+习题3-5 三角形判断
+分数 15
+#include<stdio.h>
+#include<math.h>
+int main(void)
+{
+double x1,y1,x2,y2,x3,y3;
+    scanf("%lf %lf %lf %lf %lf %lf",&x1,&y1,&x2,&y2,&x3,&y3);
+    double tr1,tr2,tr3;
+    tr1=sqrt(pow(x2-x1,2)+pow(y2-y1,2));//C语言开方sqrt,乘方pow(数字,几次方)
+    tr2=sqrt(pow(x3-x1,2)+pow(y3-y1,2));
+    tr3=sqrt(pow(x3-x2,2)+pow(y3-y2,2));
+    if(tr1+tr2>tr3&&tr1+tr3>tr2&&tr2+tr3>tr1)
+    {
+        double L=tr1+tr2+tr3,P=(tr1+tr2+tr3)/2;
+        double A=sqrt(P*(P-tr1)*(P-tr2)*(P-tr3));
+        printf("L = %.2f, A = %.2f",L,A);
+    }
+    else{
+        printf("Impossible");
+    }
+}
+
+
 
 
 
