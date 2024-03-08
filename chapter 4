@@ -16,3 +16,154 @@ double eps;
     }while(k>eps);
     printf("sum = %lf",sum);
 }
+
+练习4-6 猜数字游戏
+分数 15
+#include<stdio.h>
+int main(void)
+{
+int ran,n;
+    scanf("%d %d",&ran,&n);
+    int i=0;int guess;
+    do{
+        scanf("%d",&guess);
+        if(guess>ran){printf("Too big\n");}
+        else if(guess<ran&&guess>=0){printf("Too small\n");}
+        i++;
+    }while(i<=n&&guess!=ran&&guess>=0);
+    
+    if(guess>=0){
+    if(i==1){
+        printf("Bingo!");
+    }
+    else if(i==2||i==3){
+        printf("Lucky You!");
+    }
+    else if(i>3&&i<=n){
+        printf("Good Guess!");
+    }
+    else{
+        printf("Game Over");
+    }
+    }
+    else{printf("Game Over");}
+    // switch(count){//用switch case语句,不好估计4-n次的状况,所以用if else if else 语句
+    //     case 1:
+    //         printf("Bingo!");
+    //         break;
+    //     case 2:
+    //         printf("Lucky You!");
+    //         break;
+    //     case 3:
+    //         printf("Lucky You!");
+    //         break;
+    //     case 4:
+    //         printf("Good Guess!");
+        
+    // }
+
+}
+
+练习4-7 求e的近似值
+分数 15
+#include<stdio.h>
+int main(){
+    int n;double sum=1;
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        double fact=1;
+        for(int j=1;j<=i;j++)
+        {
+            fact*=j;
+        }
+        sum+=1/fact;
+    }
+    printf("%.8f",sum);
+}
+
+练习4-10 找出最小值
+分数 20
+#include<stdio.h>
+int main(void)
+{
+int n;scanf("%d",&n);int num,min=99999999;
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%d",&num);
+        if(num<min){min=num;}
+    }
+    printf("min = %d",min);
+}
+
+练习4-11 统计素数并求和
+分数 20
+#include<stdio.h>
+#include<math.h>
+int isP(int x){
+    //判断一个数是否是素数,最简单的方法是从二开始,一直判断是否x%i==0
+    if(x==1)return 0;
+    else{
+    for(int i=2;i<x;i++){
+        if(x%i==0){return 0;}
+    }
+    return 1;
+    }
+    稍好的办法:从2到sqrt(X),每次i+=2,可以节省一个数量级的运算次数
+    if(x==1||(x%2==0&&x!=2))return 0;
+    else{
+        double k=sqrt(x);
+        for(int i=3;i<=k;i+=2){
+            if(x%i==0){return 0;}
+        }
+        return 1;
+    }
+    // // 更好的方法:建立一个2-x的素数表,只针对表中素数作模运算.(此方法暂时没做出来)
+    // if(x==1){return 0;}
+    // else if(x==2){return 1;}
+    // else{
+    // int prime[100]={2}; int count=1;
+    // for(int i=3;i<sqrt(x);i++){//判断其中的每个i是否是素数,如果是,加入表中
+    //     for(int j=0;j<count ;j++)
+    //     {
+    //         if(i%prime[j]==0){prime[count++]=i;}
+    //     }
+    // }
+    // for(int i=0;i<count;i++){
+    //     if(x%prime[i]==0){return 0;}
+    // }
+    //         return 1;
+    // }
+    
+}
+int main(void)
+{
+int m,n;
+    scanf("%d %d",&m,&n);
+    int count=0,sum=0;
+    for(int i=m;i<=n;i++)//对于从m到n的每个数,判断他们是否是素数
+    {
+        if(isP(i)){//素数返回1,合数返回0
+            count++;sum+=i;
+        }
+    }
+    printf("%d %d",count,sum);
+}
+
+习题4-1 求奇数和
+分数 15
+#include<stdio.h>
+int main(void)
+{
+    int sum=0;
+        int n;
+        scanf("%d",&n);
+    while(n>0){
+        if(n%2==1){
+        sum+=n;
+        }
+        scanf("%d",&n);
+        
+    }
+    printf("%d",sum);
+}
