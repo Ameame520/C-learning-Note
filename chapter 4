@@ -167,3 +167,126 @@ int main(void)
     }
     printf("%d",sum);
 }
+
+习题4-2 求幂级数展开的部分和
+分数 20
+#include<stdio.h>
+#include<math.h>
+double fact(int n){
+    double ret=1;
+    for(int i=1;i<=n;i++){
+        ret*=i;
+    }
+    return ret;
+}
+int main(void)
+{
+    double x;
+    scanf("%lf",&x);
+    double sum=1,i=1; double ratio;
+    do{
+    ratio=pow(x,i)/fact(i);
+    sum+=ratio;
+    i++;
+    }while(ratio>0.00001);
+    printf("%.4f",sum);
+}
+
+习题4-3 求分数序列前N项和
+分数 15
+#include<stdio.h>
+int main(void){
+    double dad=1,son=2,sum=0;
+    int n;scanf("%d",&n);
+    for(int i=1;i<=n;i++){
+    sum+=son/dad;
+    double temp=son;son+=dad; dad=temp;
+    }
+    printf("%.2f",sum);
+}
+
+习题4-4 特殊a串数列求和
+分数 20
+#include<stdio.h>
+int main(void) {
+    int sum=0,a,n;
+    scanf("%d %d",&a,&n);
+    for(int i=1;i<=n;i++){
+        int temp=0,k=a;
+    for(int j=1;j<=i;j++){
+        temp+=k;k*=10;
+    }
+        sum+=temp;
+    }
+    printf("s = %d",sum);
+}
+
+习题4-5 换硬币
+分数 20
+#include<stdio.h>
+int main(void)
+{
+int coin; scanf("%d",&coin);
+int c5,c1,c2; int r1 =coin,r2,r3;int count =0;
+    for(c5=r1/5;c5>=1;c5--){
+        r1-=c5*5;//r2为剩余余额,如果r2<=0,将跳过下面的for
+        r2=r1;
+        for(c2=r2/2;c2>=1;c2--){
+            r2-=c2*2;
+            r3=r2;//r2为剩余余额,如果r2<=0,将跳过下面的for
+            for(c1=r3;c1>=1;c1--){
+                if(c5*5+c2*2+c1==coin){//仅当和正确时,print
+                printf("fen5:%d, fen2:%d, fen1:%d, total:%d\n",c5,c2,c1,c5+c2+c1);
+                //重点考虑如何重置
+                    count++;
+                }
+            }
+            r2=r1;//如果因为r2<0跳过了循环,应该让r2-- 重新开始,所以可以将r1恢复成上次成功的r1
+        }
+        r1=coin;//还原考虑五分之前的情况
+    }
+    printf("count = %d",count);
+}
+
+习题4-6 水仙花数
+分数 20(//因为调用了pow函数导致超时,但思路正确)
+#include <stdio.h>
+#include<math.h>  
+int isK(int x,int n)//n位数x是否是水仙花数
+{
+    int sum=0,temp=x;//需要注意,判断水仙花数最后用到x,所以用temp将X值保护起来,以免变动
+    while(temp>0){
+    int k=temp%10;
+    sum+=pow(k,n);
+    temp/=10;
+    }
+    if(sum==x){return 1;}
+    return 0;
+}
+int main(void)
+{
+    int n,i;
+    scanf("%d",&n);
+    for(i=pow(10,n-1);i<pow(10,n);i++)
+    {
+        if(isK(i,n)){printf("%d\n",i);}
+    }
+}
+
+习题4-7 最大公约数和最小公倍数
+分数 15
+#include<stdio.h>
+int main(void)
+{
+ //18 12  辗转相除法,大的除小的,小的除余数,直到余数出现0,之前那个数就是最大公约数
+    int m,n,tmpm,tmpn;
+    scanf("%d %d",&m,&n);
+    if(m<n){int temp=m; m=n;n=temp;}
+    tmpm=m;tmpn=n;
+    int k;
+    do{
+    k=tmpm%tmpn;
+    tmpm=tmpn;tmpn=k;
+    }while(k!=0);
+    printf("%d %d",tmpm,m*n/tmpm);
+}
