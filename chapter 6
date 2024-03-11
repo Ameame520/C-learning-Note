@@ -1,0 +1,93 @@
+练习6-3 英文字母替换加密（大小写转换+后移1位）
+  #include<stdio.h>
+int main(void)
+{
+    //65-90 A-Z, 97-122 a-z
+    char c,d;
+    scanf("%c",&c);
+    while(c!='\n'){
+        //加密规则
+        if(c>=97&&c<=121){d=c-31;}
+        else if(c>=65&&c<=89){d=c+33;}
+        else if(c=='z'){d='A';}
+        else if(c=='Z'){d='a';}
+        else {d=c;}
+        printf("%c",d);
+        scanf("%c",&c);
+    }
+    printf("\n"); 
+}
+
+习题6-7 简单计算器
+分数 20
+#include<stdio.h>
+//借鉴答案
+int main(){
+    int a,sum;
+    char c;
+    scanf("%d",&sum);//第一个输入是sum
+    while((c=getchar())!='='){//之后的输入一定是符号
+        scanf("%d",&a);//再之后一定是数字.
+        switch(c){ //
+            case '+':sum+=a;break;
+            case '-':sum-=a;break;
+            case '*':sum*=a;break;
+            case '/':
+                if(a==0){
+                    printf("ERROR");
+                    return 0;
+                }
+                else sum/=a;
+                break;
+            default:printf("ERROR");
+                    return 0;
+        }
+    }
+    printf("%d",sum);
+    return 0;
+}
+
+习题6-8 单词首字母大写
+分数 15
+  #include<stdio.h>
+//以下代码可以在DEVC上运行,但PTA上会报错
+// int main(void){
+//     char c;
+//     scanf("%c",&c);
+// while(c!='\n'){
+// if(c!=' '){
+//     printf("%c",c-32);
+//     do{
+//     scanf("%c",&c);
+//     printf("%c",c);
+//     }while(c!=' ');
+// }
+// else{scanf("%c",&c);}
+    
+// }
+// }
+// int main(void){
+//     char c;
+//     c=getchar();
+// while(c!='\n'){
+// if(c!=' '){
+//     printf("%c",c-32);
+//     do{
+//     c=getchar();
+//     printf("%c",c);
+//     }while(c!=' ');
+// }
+// else{c=getchar();}
+    
+// }
+// }
+//参考答案
+int main(){
+	char ch,prev=' ';
+	while((ch=getchar())!='\n'){
+		if (ch>='a'&&ch<='z'&&prev==' ') ch=ch-'a'+'A';
+		putchar(ch);
+		prev=ch;
+	}
+	return 0;
+}
