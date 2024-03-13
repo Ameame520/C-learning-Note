@@ -1,0 +1,166 @@
+练习7-2 求最大值及其下标
+分数 20
+#include<stdio.h>
+int main(void)
+{
+    int n;
+    scanf("%d",&n);
+    int arr[n];//定义一个不定长数组.
+    for(int i=0;i<n;i++)
+    {
+        int num;
+        scanf("%d",&num);
+        arr[i]=num;
+    }
+    int max=arr[0],pos=0;
+    for(int j=1;j<n;j++)
+    {
+        if(arr[j]>max){
+            pos=j;
+            max=arr[j];
+        }
+    }
+    printf("%d %d",max,pos);
+}
+
+练习7-3 将数组中的数逆序存放
+分数 20
+#include<stdio.h>
+int main(void)
+{
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        int num;
+        scanf("%d",&num);
+        arr[i]=num;
+    }
+    for(int j=n-1;j>=0;j--)
+    {
+        printf("%d",arr[j]);
+        if(j>0){printf(" ");}
+    }
+}
+
+练习7-4 找出不是两个数组共有的元素
+分数 20
+#include<stdio.h>
+int main(void)
+{
+    int n1,n2,num1,num2,num;
+    //指定容量,输入arr1数组
+    scanf("%d",&n1);
+    int arr1[n1];
+    for(int i=0;i<n1;i++)
+    {
+        scanf("%d",&num1);
+        arr1[i]=num1;
+    }
+    //指定容量,输入arr2数组
+    scanf("%d",&n2);
+    int arr2[n2];
+    for(int j=0;j<n2;j++)
+    {
+        scanf("%d",&num2);
+        arr2[j]=num2;
+    }
+    //指定存放不同元素的数组arr3与下标k
+    int arr3[20];
+    int k=0;
+    //flag1保证一个数组中出现的任意元素另一个数组中没有,flag2保证arr3中出现的元素不相同
+    for(int i=0;i<n1;i++){
+        num=arr1[i];
+        int flag1=1,flag2=1;
+        for(int j=0;j<n2;j++){
+            if(arr2[j]==num){flag1=0;}
+        }
+        for(int r=0;r<k;r++){
+            if(arr3[r]==num){flag2=0;}
+        }
+        if(flag1&&flag2){arr3[k++]=num;}
+    }
+    for(int i=0;i<n2;i++){
+        num=arr2[i];
+        int flag1=1,flag2=1;
+        for(int j=0;j<n1;j++){
+            if(arr1[j]==num){flag1=0;}
+        }
+        for(int r=0;r<k;r++){
+            if(arr3[r]==num){flag2=0;}
+        }
+        if(flag1&&flag2){arr3[k++]=num;}
+    }
+    for(int i=0;i<k;i++){
+        printf("%d",arr3[i]);
+        if(i<k-1){printf(" ");}
+    }
+}
+
+练习7-7 矩阵运算
+分数 20
+#include<stdio.h>
+int main(void)
+{
+    int n;scanf("%d",&n);
+    int arr[n][n];int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++){
+            scanf("%d",&arr[i][j]);
+            //满足条件则相加
+            if((i+j)!=n-1&&i!=n-1&&j!=n-1){sum+=arr[i][j];}
+        }
+    }
+    printf("%d",sum);
+}
+
+练习7-8 方阵循环右移
+分数 20
+#include<stdio.h>
+int main(void)
+{
+    int m,n;
+    scanf("%d %d",&m,&n);
+    int arr[n][n],ans[n][n];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            scanf("%d",&arr[i][j]);
+            //m=2时,a[0][0]变成a[0][2]
+            ans[i][(j+m)%n]=arr[i][j];
+        }
+    }
+    for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+        printf("%d ",ans[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+练习7-9 计算天数
+分数 15
+#include<stdio.h>
+int isrun(int year){
+    //能被四整除且不被100整除
+    if((year%4==0&&year%100!=0)||(year%400==0)){return 1;}
+    return 0;
+}
+int main(void)
+{
+    int y,m,d;
+    scanf("%d/%d/%d",&y,&m,&d);
+    int days1[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+    int days2[12]={31,29,31,30,31,30,31,31,30,31,30,31};
+    int days=0;
+        for(int i=0;i<m-1;i++){
+            if(isrun(y))
+                days+=days2[i];
+            else
+                days+=days1[i];
+        }
+    days+=d;
+    printf("%d",days);
+}
+
