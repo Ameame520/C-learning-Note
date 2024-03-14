@@ -164,3 +164,38 @@ int main(void)
     printf("%d",days);
 }
 
+练习7-10 查找指定字符
+分数 15
+#include<stdio.h>
+int main(void)
+{
+    char c=getchar();
+    char d;int i,index,flag;
+    i=-1,flag=1;
+    getchar();
+    scanf("%c",&d);
+    while(d!='\n'){
+        i++;
+        if(d==c){index=i; flag=0;}
+        scanf("%c",&d);
+    }
+    if(!flag){
+        printf("index = %d",index); 
+    }
+    else{printf("Not Found");}
+}
+
+练习7-11 字符串逆序
+分数 15
+#include<stdio.h>
+int main(void){
+char arr[80];char ch;int i=0;
+    scanf("%c",&ch);
+    while(ch!='\n'){
+        arr[i++]=ch;
+        scanf("%c",&ch);
+    }
+    for(int j=i-1;j>=0;j--){
+        printf("%c",arr[j]);
+    }
+}
