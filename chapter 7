@@ -199,3 +199,162 @@ char arr[80];char ch;int i=0;
         printf("%c",arr[j]);
     }
 }
+
+习题7-1 选择法排序
+分数 20
+#include<stdio.h>
+    void InsertSort(int arr[],int n);
+    void BubbleSort(int arr[],int n);
+    void QuickSort(int arr[],int,int);
+    int Partition(int arr[],int low,int high);
+    void SelectSort(int arr[],int n);
+    void MergeSort(int arr[],int high,int low);
+    void Merge(int arr[],int low,int mid,int high);
+int main(void)
+{
+    //输入数组信息(带哨兵)
+    int n;scanf("%d",&n);
+    int arr[n+1];
+    int i=1;
+    scanf("%d",&arr[i]);
+    while(i<n){
+    	i++;
+        scanf("%d",&arr[i]);
+    }
+    //开始倒序排序 
+//	  InsertSort(arr,n);
+//    BubbleSort(arr,n);
+//    QuickSort(arr,1,n);
+//    SelectSort(arr,n);
+    MergeSort(arr,1,n);
+    for(int j=1;j<=n;j++){
+        printf("%d",arr[j]);
+            if(j<n){printf(" ");}
+    }
+}
+  
+void InsertSort(int arr[],int n){
+    int i,j;
+    for(i=2;i<=n;i++){
+        //如果出现逆序,需要排序
+        if(arr[i]>arr[i-1]){
+            //哨兵存放待排序元素
+            arr[0]=arr[i];
+            for(j=i-1;arr[0]>arr[j];j--){//当满足"当前元素仍小于前面位置元素时,需移动所有逆序元素
+                arr[j+1]=arr[j];
+            }
+            arr[j+1]=arr[0];
+        }
+    }
+}
+void BubbleSort(int arr[],int n){
+    //不断地把最小的数字送到数组最后
+    int i,j;
+    //总共n-1趟
+    for(i=0;i<n-1;i++){
+        int flag=1;
+        //每趟移动一个for循环定义的步数
+        for(j=1;j<n-i;j++){
+            if(arr[j]<arr[j+1])
+            {int temp=arr[j];arr[j]=arr[j+1];arr[j+1]=temp; flag=0;}
+    }
+        if(flag){break;}
+    }
+}
+int Partition(int arr[],int low,int high){
+    //第一个元素设置为轴元素
+    int pivot=arr[low];
+    while(low<high){//左右逼近对齐
+        while(arr[high]<=pivot&&low<high){high--;}
+        arr[low]=arr[high];
+        while(arr[low]>=pivot&&low<high){low++;}
+        arr[high]=arr[low];
+    }
+    arr[low]=pivot;
+    return low;
+}
+void QuickSort(int arr[],int low,int high){
+    //快速排序为递归思想,只要待排序元素个数大于1,即low<high,需要下一次排序
+   //如果用 while(low<high),因为low high值不会在函数中改变,所以出不去循环
+   if(low<high) 
+    {
+        int pos=Partition(arr,low,high);
+        QuickSort(arr,low,pos-1);
+        QuickSort(arr,pos+1,high);
+    }
+}
+void SelectSort(int arr[],int n){
+    int i, j;
+    //进行n-1趟,每趟找到最大的元素放在第i个位置.
+    for(i=1;i<n;i++){
+        for(j=i+1;j<=n;j++){
+            if(arr[j]>arr[i]){int temp=arr[i]; arr[i]=arr[j];arr[j]=temp;}
+        }
+    }
+}
+void Merge(int arr[],int low,int mid,int high){
+    //复制数据到copy数组中
+    int k=high+1,i=low;
+    int j;
+    int copy[k];
+    while(i<k){
+    copy[i]=arr[i];
+    i++;
+    }
+    i=low,j=mid+1,k=low;
+    while(i<=mid&&j<=high){
+        if(copy[j]>copy[i]){arr[k++]=copy[j++];}
+        else{arr[k++]=copy[i++];}
+    }
+    while(i<=mid){arr[k++]=copy[i++];}
+    while(j<=high){arr[k++]=copy[j++];}         
+}
+void MergeSort(int arr[],int low,int high)
+{
+    if(low<high)
+    {
+    int mid=(low+high)/2;
+    MergeSort(arr,low,mid);
+    MergeSort(arr,mid+1,high);
+    Merge(arr,low,mid,high);
+    }
+}
+
+习题7-2 求一批整数中出现最多的个位数字
+分数 20
+#include <stdio.h>
+void load(int num[],int x){
+    if(!x){num[0]++;}
+    else{
+	while(x>0){
+		int k=x%10;
+		num[k]++;
+		x/=10;
+	 }
+    }
+}
+int main(void)
+{
+	//读取信息,存在数组中 
+    int n;scanf("%d",&n);
+    int arr[n]; int i,j;
+    for(i=0;i<n;i++)
+    {scanf("%d",&arr[i]);}
+    //把每位数字出现的次数统计到数组num中 
+    int num[10]={0};
+    for(j=0;j<n;j++){
+    	load(num,arr[j]);
+	}
+	int max=0;
+	//
+	for(i=0;i<10;i++){
+		if(num[i]>=max) 
+		max=num[i];	
+	} 
+	printf("%d:",max);
+	for(i=0;i<10;i++)
+	{
+		if(num[i]==max){printf(" %d",i);
+		}
+	}
+}
